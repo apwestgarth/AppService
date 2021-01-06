@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_US"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://azure.github.io/AppService/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azure.github.io/AppService/" rel="alternate" type="text/html" hreflang="en_US" /><updated>2021-01-06T20:32:18+00:00</updated><id>https://azure.github.io/AppService/feed.xml</id><title type="html">Azure App Service</title><subtitle>Announcements, updates, and release notes from the Azure App Service product team.</subtitle><author><name>Azure App Service</name></author><entry><title type="html">Java, Tomcat, and JBoss EAP version updates</title><link href="https://azure.github.io/AppService/2021/01/06/java-stacks-update.html" rel="alternate" type="text/html" title="Java, Tomcat, and JBoss EAP version updates" /><published>2021-01-06T00:00:00+00:00</published><updated>2021-01-06T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/01/06/java-stacks-update</id><content type="html" xml:base="https://azure.github.io/AppService/2021/01/06/java-stacks-update.html">&lt;p&gt;The latest App Service releases included new Java, Tomcat and JBoss EAP versions.&lt;/p&gt;
+
+&lt;h2 id=&quot;windows&quot;&gt;Windows&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;New Tomcat versions
+    &lt;ul&gt;
+      &lt;li&gt;9.0.38&lt;/li&gt;
+      &lt;li&gt;8.5.58&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;New Java versions
+    &lt;ul&gt;
+      &lt;li&gt;11.0.8&lt;/li&gt;
+      &lt;li&gt;8.0.265&lt;/li&gt;
+      &lt;li&gt;7.0.272&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Eclipse Foundation has deprecated Jetty 9.1 and 9.3 (&lt;a href=&quot;https://www.eclipse.org/jetty/download.php&quot;&gt;source&lt;/a&gt;), so these runtimes are no longer shown on the Portal. You can still &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/overview#built-in-languages-and-frameworks&quot;&gt;create sites with these versions&lt;/a&gt;. Tomcat 8.0 has &lt;a href=&quot;https://tomcat.apache.org/tomcat-80-eol.html&quot;&gt;reached End-Of-Life&lt;/a&gt; and will also be hidden in an upcoming Portal update.&lt;/p&gt;
+
+&lt;h2 id=&quot;linux&quot;&gt;Linux&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JBoss EAP is now available with Java 11
+    &lt;ul&gt;
+      &lt;li&gt;JBoss EAP now has an “auto-update” option. This option currently uses JBoss 7.2 but will automatically use the latest JBoss versions as they are added.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;New Java versions
+    &lt;ul&gt;
+      &lt;li&gt;8u252&lt;/li&gt;
+      &lt;li&gt;11.0.7&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;New Tomcat versions
+    &lt;ul&gt;
+      &lt;li&gt;9.0.37&lt;/li&gt;
+      &lt;li&gt;8.5.57&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Azure App Service</name></author><category term="Java" /><summary type="html">The latest App Service releases included new Java, Tomcat and JBoss EAP versions. Windows New Tomcat versions 9.0.38 8.5.58 New Java versions 11.0.8 8.0.265 7.0.272 Eclipse Foundation has deprecated Jetty 9.1 and 9.3 (source), so these runtimes are no longer shown on the Portal. You can still create sites with these versions. Tomcat 8.0 has reached End-Of-Life and will also be hidden in an upcoming Portal update. Linux JBoss EAP is now available with Java 11 JBoss EAP now has an “auto-update” option. This option currently uses JBoss 7.2 but will automatically use the latest JBoss versions as they are added. New Java versions 8u252 11.0.7 New Tomcat versions 9.0.37 8.5.57</summary></entry><entry><title type="html">Deploying to Network-secured sites</title><link href="https://azure.github.io/AppService/2021/01/04/deploying-to-network-secured-sites.html" rel="alternate" type="text/html" title="Deploying to Network-secured sites" /><published>2021-01-04T00:00:00+00:00</published><updated>2021-01-04T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2021/01/04/deploying-to-network-secured-sites</id><content type="html" xml:base="https://azure.github.io/AppService/2021/01/04/deploying-to-network-secured-sites.html">&lt;p&gt;With the recently-announced &lt;a href=&quot;https://azure.github.io/AppService/2020/10/06/private-endpoint-app-service-ga.html&quot;&gt;Private Endpoints integration&lt;/a&gt; you can block inbound access from the internet to your web app. Before this integration, developers would need to use an App Service Environment (ASE) if they wanted to host their network-secured applications on App Service. With the combination of the Virtual Network (VNet) and Private Endpoint integrations on App Service, you can secure your site’s inbound and outbound requests respectively.&lt;/p&gt;
+
+&lt;p&gt;This is great for organizations that want the network security without the added cost of an ASE. However, if inbound access to your site is blocked, that can disrupt your existing delivery pipeline if you were not using Private Endpoints before. This article will walk through the process of installing an Azure DevOps agent on a Virtual Machine (VM) to deploy to a site secured with VNet and Private Endpoints. This solution works for &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/environment/create-ilb-ase&quot;&gt;ILB ASEs&lt;/a&gt; as well.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This article assumes some familiarity with Virtual Networks. If you are new to Azure Networking, please see this &lt;a href=&quot;https://docs.microsoft.com/learn/modules/network-fundamentals/&quot;&gt;Microsoft Learning Path&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;solution-overview&quot;&gt;Solution Overview&lt;/h2&gt;
+
+&lt;p&gt;This guide will walk through the process of deploying a Virtual Machine Scale Set (VMSS) and web app into two subnets of the same virtual network. You wil use Azure DevOps to install a build agent on the virtual machines and configure your DevOps Pipeline to run on those agents. Finally, you will enable private endpoints so the site cannot be reached from the public internet.&lt;/p&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;To follow this guide you will need the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A valid Azure subscription&lt;/li&gt;
+  &lt;li&gt;An Azure DevOps organization and project&lt;/li&gt;
+  &lt;li&gt;A DevOps repository with a web application we can deploy to App Service&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;part-1-set-up-resources&quot;&gt;Part 1: Set up resources&lt;/h2&gt;
+
+&lt;p&gt;First, let’s set up the Azure DevOps project and VM that will host the agent.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create a Virtual Machine Scale Set with Ubuntu Server 18.04 LTS. This process will automatically create a VNet as well.&lt;/li&gt;
+  &lt;li&gt;Once the VM Scale Set is created, open Azure DevOps and navigate to &lt;strong&gt;Project settings&lt;/strong&gt; &amp;gt; &lt;strong&gt;Pipelines&lt;/strong&gt; &amp;gt; &lt;strong&gt;Agent pools&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;Add pool&lt;/strong&gt; and this will open a context menu. Under &lt;strong&gt;Pool type&lt;/strong&gt; select “Azure virtual machine scale set”. Choose your subscription and the VM Scale Set you just created. You can configure the max number of machines for the scale set, the number to keep on standby, and more. Read more information &lt;a href=&quot;https://docs.microsoft.com/azure/devops/pipelines/licensing/concurrent-jobs?view=azure-devops&amp;amp;tabs=self-hosted&quot;&gt;here&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;Create&lt;/strong&gt; to set up the agent pool. You can monitor the process under &lt;strong&gt;Diagnostics&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;part-2-configure-networking-features&quot;&gt;Part 2: Configure networking features&lt;/h2&gt;
+
+&lt;p&gt;You now have a VM Scale Set with DevOps agents installed, all deployed within a VNet. Now you will create the web app and confirm that the VM’s and webapp can communicate over the virtual network.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://portal.azure.com/#create/Microsoft.WebSite&quot;&gt;Create an Azure Webapp&lt;/a&gt; &lt;em&gt;in the same region&lt;/em&gt; as the VM. Choose whatever runtime and operating system fit your application.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once the web app is created, go to &lt;strong&gt;Networking&lt;/strong&gt; &amp;gt; &lt;strong&gt;VNet Integration&lt;/strong&gt;. Add the site to the same virtual network as the VM. The VM and webapp cannot be in the same subnet, so you may need to create another subnet.&lt;/p&gt;
+
+    &lt;p&gt;With VNet integration enabled, the web app and VM can communicate over the virtual network. To test this, go to the web console for your site at &lt;em&gt;https://my-linux-site.scm.azurewebsites.net/webssh/host&lt;/em&gt; on Linux apps, or &lt;em&gt;https://my-windows-site.scm.azurewebsites.net/DebugConsole/?shell=powershell&lt;/em&gt; for Windows. Once the console is open, run the following command to ping the VM’s private IP. You can find your VM’s private IP from the &lt;strong&gt;Networking&lt;/strong&gt; blade on the VM resource. It’s shown under “NIC Private IP”.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; root@87d2385265ad&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ping 10.0.0.5  &lt;span class=&quot;c&quot;&gt;# replace with your VM's private IP&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Now that the resources are in the same Virtual Network and can communicate over that network, let’s enable Private Endpoints on the web app. This will block inbound access to the web app from the public internet.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In the Portal, go to your web app &amp;gt; &lt;strong&gt;Networking&lt;/strong&gt; &amp;gt; &lt;strong&gt;Private Endpoint connections&lt;/strong&gt; &amp;gt; &lt;strong&gt;Configure your private endpoint connections&lt;/strong&gt; &amp;gt; &lt;strong&gt;+ Add&lt;/strong&gt;. This will open a context blade to configure the Private Endpoint. Provide a name, subscription, and Virtual network. Check the box to allow the service to integrate with Azure Private DNS zones. This will create a private DNS zone if one does not already exist, and set up the correct domain entries for your web app. Click &lt;strong&gt;OK&lt;/strong&gt; to create the resources.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once the private link and DNS resources are created, open an SSH connection to your VM. Run the command below to ping the web app and confirm that you can reach the site from the VM. If you cannot reach the site from the VM, the DevOps agent won’t be able to either!&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl your-site-name.azurewebsites.net
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;You can also use &lt;code class=&quot;highlighter-rouge&quot;&gt;nslookup&lt;/code&gt; to see how the private DNS entries ultimately map to the web app.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;installing-build-tools-on-your-vms&quot;&gt;Installing build tools on your VMs&lt;/h3&gt;
+
+&lt;p&gt;The virtual machines in your scale set may not come with the build tools that your pipeline will need (like Maven, NPM, or dotnet). To install these tools, you can add the &lt;a href=&quot;https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript&quot;&gt;&lt;strong&gt;Custom Script for Linux Extension&lt;/strong&gt;&lt;/a&gt;. This extension allows you to upload a shell script that is executed whenever a new VM is provisioned in the scale set. So in this case, the shell script could install your necessary build tools.&lt;/p&gt;
+
+&lt;h2 id=&quot;part-3-create-the-ci-pipeline&quot;&gt;Part 3: Create the CI pipeline&lt;/h2&gt;
+
+&lt;p&gt;At this point the web app cannot be reached from the public internet but our VM can reach the site through the virtual network. Now let’s set up a DevOps Pipeline to build and deploy your application from the VM.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Head back to Azure DevOps and go to &lt;strong&gt;Pipelines&lt;/strong&gt; &amp;gt; &lt;strong&gt;New pipeline&lt;/strong&gt;. Then select the location of your project.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once you choose your project, Azure DevOps will show some templates based on your stack. For example, I was given a starter pipeline to build my Java app with Maven and deploy it to App Service Linux. Click &lt;strong&gt;Show more&lt;/strong&gt; if you don’t immediately see a good starter template.&lt;/p&gt;
+
+    &lt;p&gt;If you are not given a good template to deploy your app to App Service, use the generic starter template and add the &lt;a href=&quot;https://docs.microsoft.com/azure/devops/pipelines/targets/webapp?view=azure-devops&amp;amp;tabs=yaml&quot;&gt;Deploy to Azure Web App&lt;/a&gt; action.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Next, specify the VMSS agent pool by adding &lt;a href=&quot;https://docs.microsoft.com/azure/devops/pipelines/yaml-schema?view=azure-devops&amp;amp;tabs=schema%2Cparameter-schema#pool&quot;&gt;the &lt;code class=&quot;highlighter-rouge&quot;&gt;pool&lt;/code&gt; keyword&lt;/a&gt; on the pipeline. The value should be the name of your VMSS agent pool that you created earlier.&lt;/p&gt;
+
+    &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;na&quot;&gt;trigger&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+ &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;main&lt;/span&gt;
+
+ &lt;span class=&quot;na&quot;&gt;pool&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;VMSS&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;private&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;endpoints&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;deployment'&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# This is the name of your agent pool&lt;/span&gt;
+
+ &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+   &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AzureWebApp@1&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Azure&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Web&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;App&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Deploy:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;priv-endpoints-webapp'&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;azureSubscription&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;aaaaaa-bbbb-cccc-dddd-eeeeeeeeee'&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;appType&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;webAppLinux&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;appName&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;priv-endpoints-webapp'&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;app.jar'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Finally, save and run the workflow! See the pipeline’s logs to monitor progress and check for any errors.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure/app-service/networking/private-endpoint&quot;&gt;Using Private Endpoints for Azure Web App&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet&quot;&gt;Integrate your app with an Azure virtual network&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure/private-link/&quot;&gt;Azure Private Link documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops&quot;&gt;Azure virtual machine scale set DevOps agents&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Azure App Service</name></author><category term="Deployment" /><category term="Networking" /><summary type="html">With the recently-announced Private Endpoints integration you can block inbound access from the internet to your web app. Before this integration, developers would need to use an App Service Environment (ASE) if they wanted to host their network-secured applications on App Service. With the combination of the Virtual Network (VNet) and Private Endpoint integrations on App Service, you can secure your site’s inbound and outbound requests respectively. This is great for organizations that want the network security without the added cost of an ASE. However, if inbound access to your site is blocked, that can disrupt your existing delivery pipeline if you were not using Private Endpoints before. This article will walk through the process of installing an Azure DevOps agent on a Virtual Machine (VM) to deploy to a site secured with VNet and Private Endpoints. This solution works for ILB ASEs as well. This article assumes some familiarity with Virtual Networks. If you are new to Azure Networking, please see this Microsoft Learning Path. Solution Overview This guide will walk through the process of deploying a Virtual Machine Scale Set (VMSS) and web app into two subnets of the same virtual network. You wil use Azure DevOps to install a build agent on the virtual machines and configure your DevOps Pipeline to run on those agents. Finally, you will enable private endpoints so the site cannot be reached from the public internet. Prerequisites To follow this guide you will need the following: A valid Azure subscription An Azure DevOps organization and project A DevOps repository with a web application we can deploy to App Service Part 1: Set up resources First, let’s set up the Azure DevOps project and VM that will host the agent. Create a Virtual Machine Scale Set with Ubuntu Server 18.04 LTS. This process will automatically create a VNet as well. Once the VM Scale Set is created, open Azure DevOps and navigate to Project settings &amp;gt; Pipelines &amp;gt; Agent pools. Click Add pool and this will open a context menu. Under Pool type select “Azure virtual machine scale set”. Choose your subscription and the VM Scale Set you just created. You can configure the max number of machines for the scale set, the number to keep on standby, and more. Read more information here. Click Create to set up the agent pool. You can monitor the process under Diagnostics. Part 2: Configure networking features You now have a VM Scale Set with DevOps agents installed, all deployed within a VNet. Now you will create the web app and confirm that the VM’s and webapp can communicate over the virtual network. Create an Azure Webapp in the same region as the VM. Choose whatever runtime and operating system fit your application. Once the web app is created, go to Networking &amp;gt; VNet Integration. Add the site to the same virtual network as the VM. The VM and webapp cannot be in the same subnet, so you may need to create another subnet. With VNet integration enabled, the web app and VM can communicate over the virtual network. To test this, go to the web console for your site at https://my-linux-site.scm.azurewebsites.net/webssh/host on Linux apps, or https://my-windows-site.scm.azurewebsites.net/DebugConsole/?shell=powershell for Windows. Once the console is open, run the following command to ping the VM’s private IP. You can find your VM’s private IP from the Networking blade on the VM resource. It’s shown under “NIC Private IP”. root@87d2385265ad$ ping 10.0.0.5 # replace with your VM's private IP Now that the resources are in the same Virtual Network and can communicate over that network, let’s enable Private Endpoints on the web app. This will block inbound access to the web app from the public internet. In the Portal, go to your web app &amp;gt; Networking &amp;gt; Private Endpoint connections &amp;gt; Configure your private endpoint connections &amp;gt; + Add. This will open a context blade to configure the Private Endpoint. Provide a name, subscription, and Virtual network. Check the box to allow the service to integrate with Azure Private DNS zones. This will create a private DNS zone if one does not already exist, and set up the correct domain entries for your web app. Click OK to create the resources. Once the private link and DNS resources are created, open an SSH connection to your VM. Run the command below to ping the web app and confirm that you can reach the site from the VM. If you cannot reach the site from the VM, the DevOps agent won’t be able to either! curl your-site-name.azurewebsites.net You can also use nslookup to see how the private DNS entries ultimately map to the web app. Installing build tools on your VMs The virtual machines in your scale set may not come with the build tools that your pipeline will need (like Maven, NPM, or dotnet). To install these tools, you can add the Custom Script for Linux Extension. This extension allows you to upload a shell script that is executed whenever a new VM is provisioned in the scale set. So in this case, the shell script could install your necessary build tools. Part 3: Create the CI pipeline At this point the web app cannot be reached from the public internet but our VM can reach the site through the virtual network. Now let’s set up a DevOps Pipeline to build and deploy your application from the VM. Head back to Azure DevOps and go to Pipelines &amp;gt; New pipeline. Then select the location of your project. Once you choose your project, Azure DevOps will show some templates based on your stack. For example, I was given a starter pipeline to build my Java app with Maven and deploy it to App Service Linux. Click Show more if you don’t immediately see a good starter template. If you are not given a good template to deploy your app to App Service, use the generic starter template and add the Deploy to Azure Web App action. Next, specify the VMSS agent pool by adding the pool keyword on the pipeline. The value should be the name of your VMSS agent pool that you created earlier. trigger: - main pool: 'VMSS for private endpoints deployment' # This is the name of your agent pool steps: - task: AzureWebApp@1 displayName: 'Azure Web App Deploy: priv-endpoints-webapp' inputs: azureSubscription: 'aaaaaa-bbbb-cccc-dddd-eeeeeeeeee' appType: webAppLinux appName: 'priv-endpoints-webapp' package: 'app.jar' Finally, save and run the workflow! See the pipeline’s logs to monitor progress and check for any errors. Resources Using Private Endpoints for Azure Web App Integrate your app with an Azure virtual network Azure Private Link documentation Azure virtual machine scale set DevOps agents</summary></entry><entry><title type="html">CI/CD for Python Applications</title><link href="https://azure.github.io/AppService/2020/12/11/cicd-for-python-apps.html" rel="alternate" type="text/html" title="CI/CD for Python Applications" /><published>2020-12-11T00:00:00+00:00</published><updated>2020-12-11T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2020/12/11/cicd-for-python-apps</id><content type="html" xml:base="https://azure.github.io/AppService/2020/12/11/cicd-for-python-apps.html">&lt;p&gt;GitHub announced &lt;a href=&quot;https://github.blog/2019-08-08-github-actions-now-supports-ci-cd/&quot;&gt;CI/CD support&lt;/a&gt; through GitHub Actions which became generally available at GitHub Universe in November 2019. Since then, many Azure services have released &lt;a href=&quot;https://github.com/azure/actions&quot;&gt;actions&lt;/a&gt; and integrations to make developers’ workflows more efficient. The App Service Deployment Center guides developers to set up GitHub Actions to deploy their web apps. Since then, our teams have received requests for guidance and best practices when setting up CI/CD (Continuous Integration and Delivery) for deploying Python apps to App Service.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This article assumes you are familiar with CI/CD pipelines. If you are not familiar, &lt;a href=&quot;https://www.redhat.com/en/topics/devops/what-cicd-pipeline&quot;&gt;read this article&lt;/a&gt; for an overview.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;building-and-deploying-python-apps&quot;&gt;Building and deploying Python apps&lt;/h2&gt;
+
+&lt;p&gt;A simple CI pipeline for a Python application might have three steps: &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install&lt;/code&gt; the packages, run tests, and send the application to the server. This seems like a sound approach… &lt;em&gt;right?&lt;/em&gt; That pattern might work for simple applications, but if the application uses packages that rely on the Operating System (such as database drivers, scipy, or scikit-learn), you may run into problems once the application starts on the server. This is because Python will make absolute references to the OS libraries, and if there are any differences between the libraries installed on the CI machine and the server, then the application will not run correctly.&lt;/p&gt;
+
+&lt;p&gt;This may seem like an excellent opportunity to leverage Docker. With Docker, you can build a container image with the Python application’s dependencies already installed. From there, you ship the image to a host with Docker installed and “just run it”. However, this option is not without its drawbacks. You will need to manage a container registry and configure your network such that the CI and production servers can securely access it. The Dockerfile also becomes part of the application repository, so you or your team will be responsible for updating the base OS and configuring the container. Fun fact: Docker was publicly announced at &lt;a href=&quot;https://www.youtube.com/watch?v=wW9CAH9nSLs&quot;&gt;PyCon in 2013&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Nylas wrote an &lt;a href=&quot;https://www.nylas.com/blog/packaging-deploying-python/&quot;&gt;excellent article&lt;/a&gt; on this topic last year. Their article covers even more deployment technologies for Python applications. Check their article to learn about your other options. Now let’s learn more about deploying Python applications to App Service without managing Docker images.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploying-to-app-service&quot;&gt;Deploying to App Service&lt;/h2&gt;
+
+&lt;p&gt;For those not familiar with Azure App Service, it is a platform-as-a-service (PaaS) for hosting web and API applications. You can deploy your application code or a container image. The service has managed runtimes for &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-python&quot;&gt;Python&lt;/a&gt;, &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-dotnetcore&quot;&gt;.NET&lt;/a&gt;, &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-nodejs&quot;&gt;Node&lt;/a&gt;, &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-java&quot;&gt;Java&lt;/a&gt;, &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-php&quot;&gt;PHP&lt;/a&gt;, and &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-ruby&quot;&gt;Ruby&lt;/a&gt;. This gives developers the choice to use containers or to simply deploy their code and let the service manage the runtime for them.&lt;/p&gt;
+
+&lt;p&gt;If you are setting up a CI/CD pipeline for your Python apps to App Service &lt;em&gt;without&lt;/em&gt; using containers, you cannot simply &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install&lt;/code&gt; and deploy your app and packages to App Service (or any server) because the OS on your build server will most likely not match the runtime on Azure. To address this, simply create an &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/configure-common#configure-app-settings&quot;&gt;app setting&lt;/a&gt; on your App Service named &lt;code class=&quot;highlighter-rouge&quot;&gt;SCM_DO_BUILD_DURING_DEPLOYMENT&lt;/code&gt; with a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;. This app setting will trigger the Oryx build pipeline to re-install your packages during deployment. &lt;a href=&quot;https://github.com/Microsoft/Oryx&quot;&gt;Oryx&lt;/a&gt; is an open-source utility by Microsoft that automatically builds source code. Oryx runs in your web app’s SCM (site control manager) site. By setting this app setting, Oryx will &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install&lt;/code&gt; your dependencies &lt;strong&gt;on the runtime&lt;/strong&gt; image so that the packages can take the appropriate dependencies on the OS libraries.&lt;/p&gt;
+
+&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;/h2&gt;
+
+&lt;p&gt;The sections below show example GitHub Actions workflows for building and deploying Python apps to App Service. Although the samples use GitHub Actions, you can use the same pattern on other CI/CD providers such as Azure DevOps or Jenkins.&lt;/p&gt;
+
+&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
+
+&lt;p&gt;Before following the examples below, make sure you have done the following.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create a Python web app on Azure. &lt;a href=&quot;&quot;&gt;Follow this quickstart to create a site&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Create an Azure Service Principal. &lt;a href=&quot;https://github.com/Azure/login#configure-deployment-credentials&quot;&gt;Follow this guide to create a Service Principal&lt;/a&gt;. A Service Principal is an identity in Azure Active Directory that is typically used for automation and accessing secrets. You will need to create a Service Principal so the GitHub Actions workflow&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;django&quot;&gt;Django&lt;/h3&gt;
+
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/Azure-Samples/djangoapp/blob/master/.github/workflows/build_and_deploy.yaml&quot;&gt;&lt;strong&gt;example workflow for building and deploying a Django app&lt;/strong&gt;&lt;/a&gt;. Fork this repository and &lt;a href=&quot;https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets&quot;&gt;create a secret&lt;/a&gt; with the Service Principal. Name the secret &lt;code class=&quot;highlighter-rouge&quot;&gt;AZURE_SERVICE_PRINCIPAL&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The workflow starts by checking out the repository to the build VM, setting up the desired Python version, and creating a virtual environment.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Setup Python version&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/setup-python@v2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;python-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3.8&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Create and start virtual environment&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;python3 -m venv venv&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;source venv/bin/activate&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once the virtual environment is activated, the dependencies are installed from the &lt;code class=&quot;highlighter-rouge&quot;&gt;requirements.txt&lt;/code&gt; file. Next, we use &lt;code class=&quot;highlighter-rouge&quot;&gt;manage.py&lt;/code&gt; to collect the static assets and run our unit tests.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Install dependencies&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;pip install -r requirements.txt&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Collect static&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;python manage.py collectstatic&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Run tests&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;python manage.py test&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Assuming all those previous steps succeed, the files are uploaded for the next job. The virtual environment is &lt;strong&gt;not&lt;/strong&gt; uploaded since it is not compatible with the runtime OS. A nice side-effect of uploading the files at the end of the job is that you can download the files from the &lt;strong&gt;Actions&lt;/strong&gt; tab to debug or inspect the contents if a deployment fails.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Upload artifact for deployment jobs&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/upload-artifact@v2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;python-app&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;. &lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;!venv/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The second job begins by downloading the files we uploaded in the previous job, then logs into the Azure CLI using a Service Principal that you set as a secret earlier.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/download-artifact@v2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;python-app&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Log in to Azure CLI&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;azure/login@v1&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;creds&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ secrets.AZURE_SERVICE_PRINCIPAL }}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once the Azure CLI is authenticated, the job sets the &lt;code class=&quot;highlighter-rouge&quot;&gt;SCM_DO_BUILD_DURING_DEPLOYMENT&lt;/code&gt; setting mentioned earlier. It also sets app settings to disable static collection (since that was done in the previous job), to run migrations on the database, and to set the Django environment to “production”. The &lt;code class=&quot;highlighter-rouge&quot;&gt;POST_BUILD_COMMAND&lt;/code&gt; is a hook where you can execute commands following the runtime build. In this case, we’re running &lt;code class=&quot;highlighter-rouge&quot;&gt;manage.py makemigrations &amp;amp;&amp;amp; python migrate&lt;/code&gt;. You &lt;em&gt;could&lt;/em&gt; apply database migrations as part of the CI workflow, but you would need to set the connection string as a secret, and if you have networking rules securing your database you will need to make the database accessible from the CI pipeline.&lt;/p&gt;
+
+&lt;p&gt;Finally, the job deploys the code using the &lt;a href=&quot;https://github.com/azure/webapps-deploy/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;webapps-deploy&lt;/code&gt; action&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Disable static collection and set migration command on App Service&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Azure/appservice-settings@v1&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;  
+    &lt;span class=&quot;na&quot;&gt;app-name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ env.WEBAPP_NAME }}&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;app-settings-json&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;[{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;DISABLE_COLLECTSTATIC&quot;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value&quot;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST_BUILD_COMMAND&quot;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value&quot;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;python&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;manage.py&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;makemigrations&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;manage.py&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;migrate&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SCM_DO_BUILD_DURING_DEPLOYMENT&quot;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value&quot;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;DJANGO_ENV&quot;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value&quot;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;production&quot;}]'&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy to App Service&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;azure/webapps-deploy@v2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;app-name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ env.WEBAPP_NAME}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;flask-and-vuejs&quot;&gt;Flask and Vue.js&lt;/h3&gt;
+
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/Azure-Samples/flask-vuejs-webapp/blob/main/.github/workflows/build_and_deploy.yaml&quot;&gt;&lt;strong&gt;example workflow for building and deploying a Flask app with Vue.js&lt;/strong&gt;&lt;/a&gt;. Fork this repository and &lt;a href=&quot;https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets&quot;&gt;create a secret&lt;/a&gt; with the Service Principal. Name the secret &lt;code class=&quot;highlighter-rouge&quot;&gt;AZURE_SERVICE_PRINCIPAL&lt;/code&gt;. You also need to replace the placeholder value for the &lt;code class=&quot;highlighter-rouge&quot;&gt;RESOURCE_GROUP&lt;/code&gt; environment variable at the top of the workflow file.&lt;/p&gt;
+
+&lt;p&gt;This workflow begins similarly to the Django example by setting the Python version, creating a virtual environment, and installing the Python packages. Unique to this example, it also sets Node.js to the desired version since the job will need to install the Vue project’s dependencies and build it.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Set up Python&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/setup-python@v2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;python-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3.6&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Set up Node.js&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/setup-node@v1&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;node-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Install and build Vue.js project&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;npm install&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;npm run build&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Create and start virtual environment&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;python3 -m venv venv&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;source venv/bin/activate&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Install dependencies&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;pip install -r requirements.txt&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;test with PyTest&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;pytest --cov=app --cov-report=xml&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once the Flask and Vue.js apps are built and tested the files are uploaded for the second job… except for the &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules/&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;venv/&lt;/code&gt; directories. We want to exclude these directories and allow Oryx to install the dependencies on the runtime image like in the Django example.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Upload artifact for deployment jobs&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/upload-artifact@v2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;python-app&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;. &lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;!node_modules/&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;!venv/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The second job downloads the artifact, logs into the Azure CLI, and sets the &lt;code class=&quot;highlighter-rouge&quot;&gt;SCM_DO_BUILD_DURING_DEPLOYMENT&lt;/code&gt; flag and &lt;code class=&quot;highlighter-rouge&quot;&gt;FLASK_ENV&lt;/code&gt; to “production”. Unlike the Django example, the workflow sets the “startup-file” command to &lt;code class=&quot;highlighter-rouge&quot;&gt;gunicorn --bind=0.0.0.0 --timeout 600 app:app&lt;/code&gt;. (&lt;a href=&quot;https://docs.gunicorn.org/en/stable/index.html&quot;&gt;Gunicorn&lt;/a&gt; is a WSGI HTTP Server commonly used for Python applications. Learn more about &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/configure-language-python#customize-startup-command&quot;&gt;custom startup commands on App Service&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/download-artifact@v2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;python-app&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Log in to Azure CLI&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;azure/login@v1&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;creds&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ secrets.AZURE_SERVICE_PRINCIPAL }}&lt;/span&gt;
+
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Configure deployment and runtime settings on the webapp&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;az configure --defaults ${{ env.RESOURCE_GROUP }}&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;az webapp config appsettings --name ${{ env.WEBAPP_NAME }} --settings \&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;SCM_DO_BUILD_DURING_DEPLOYMENT=true \&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;FLASK_ENV=production&lt;/span&gt;
+
+    &lt;span class=&quot;s&quot;&gt;az webapp config set --name ${{ env.WEBAPP_NAME }} \&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;--startup-file &quot;gunicorn --bind=0.0.0.0 --timeout 600 app:app&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, the application is deployed with the &lt;a href=&quot;https://github.com/azure/webapps-deploy/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;webapps-deploy&lt;/code&gt;&lt;/a&gt; action.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy to App Service&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;azure/webapps-deploy@v2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;app-name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ env.WEBAPP_NAME}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Azure App Service</name></author><category term="Python" /><summary type="html">GitHub announced CI/CD support through GitHub Actions which became generally available at GitHub Universe in November 2019. Since then, many Azure services have released actions and integrations to make developers’ workflows more efficient. The App Service Deployment Center guides developers to set up GitHub Actions to deploy their web apps. Since then, our teams have received requests for guidance and best practices when setting up CI/CD (Continuous Integration and Delivery) for deploying Python apps to App Service. This article assumes you are familiar with CI/CD pipelines. If you are not familiar, read this article for an overview. Building and deploying Python apps A simple CI pipeline for a Python application might have three steps: pip install the packages, run tests, and send the application to the server. This seems like a sound approach… right? That pattern might work for simple applications, but if the application uses packages that rely on the Operating System (such as database drivers, scipy, or scikit-learn), you may run into problems once the application starts on the server. This is because Python will make absolute references to the OS libraries, and if there are any differences between the libraries installed on the CI machine and the server, then the application will not run correctly. This may seem like an excellent opportunity to leverage Docker. With Docker, you can build a container image with the Python application’s dependencies already installed. From there, you ship the image to a host with Docker installed and “just run it”. However, this option is not without its drawbacks. You will need to manage a container registry and configure your network such that the CI and production servers can securely access it. The Dockerfile also becomes part of the application repository, so you or your team will be responsible for updating the base OS and configuring the container. Fun fact: Docker was publicly announced at PyCon in 2013 Nylas wrote an excellent article on this topic last year. Their article covers even more deployment technologies for Python applications. Check their article to learn about your other options. Now let’s learn more about deploying Python applications to App Service without managing Docker images. Deploying to App Service For those not familiar with Azure App Service, it is a platform-as-a-service (PaaS) for hosting web and API applications. You can deploy your application code or a container image. The service has managed runtimes for Python, .NET, Node, Java, PHP, and Ruby. This gives developers the choice to use containers or to simply deploy their code and let the service manage the runtime for them. If you are setting up a CI/CD pipeline for your Python apps to App Service without using containers, you cannot simply pip install and deploy your app and packages to App Service (or any server) because the OS on your build server will most likely not match the runtime on Azure. To address this, simply create an app setting on your App Service named SCM_DO_BUILD_DURING_DEPLOYMENT with a value of true. This app setting will trigger the Oryx build pipeline to re-install your packages during deployment. Oryx is an open-source utility by Microsoft that automatically builds source code. Oryx runs in your web app’s SCM (site control manager) site. By setting this app setting, Oryx will pip install your dependencies on the runtime image so that the packages can take the appropriate dependencies on the OS libraries. Examples The sections below show example GitHub Actions workflows for building and deploying Python apps to App Service. Although the samples use GitHub Actions, you can use the same pattern on other CI/CD providers such as Azure DevOps or Jenkins. Prerequisites Before following the examples below, make sure you have done the following. Create a Python web app on Azure. Follow this quickstart to create a site. Create an Azure Service Principal. Follow this guide to create a Service Principal. A Service Principal is an identity in Azure Active Directory that is typically used for automation and accessing secrets. You will need to create a Service Principal so the GitHub Actions workflow Django See the example workflow for building and deploying a Django app. Fork this repository and create a secret with the Service Principal. Name the secret AZURE_SERVICE_PRINCIPAL. The workflow starts by checking out the repository to the build VM, setting up the desired Python version, and creating a virtual environment. - uses: actions/checkout@v2 - name: Setup Python version uses: actions/setup-python@v2 with: python-version: 3.8 - name: Create and start virtual environment run: | python3 -m venv venv source venv/bin/activate Once the virtual environment is activated, the dependencies are installed from the requirements.txt file. Next, we use manage.py to collect the static assets and run our unit tests. - name: Install dependencies run: pip install -r requirements.txt - name: Collect static run: python manage.py collectstatic - name: Run tests run: python manage.py test Assuming all those previous steps succeed, the files are uploaded for the next job. The virtual environment is not uploaded since it is not compatible with the runtime OS. A nice side-effect of uploading the files at the end of the job is that you can download the files from the Actions tab to debug or inspect the contents if a deployment fails. - name: Upload artifact for deployment jobs uses: actions/upload-artifact@v2 with: name: python-app path: | . !venv/ The second job begins by downloading the files we uploaded in the previous job, then logs into the Azure CLI using a Service Principal that you set as a secret earlier. - uses: actions/download-artifact@v2 with: name: python-app path: . - name: Log in to Azure CLI uses: azure/login@v1 with: creds: ${{ secrets.AZURE_SERVICE_PRINCIPAL }} Once the Azure CLI is authenticated, the job sets the SCM_DO_BUILD_DURING_DEPLOYMENT setting mentioned earlier. It also sets app settings to disable static collection (since that was done in the previous job), to run migrations on the database, and to set the Django environment to “production”. The POST_BUILD_COMMAND is a hook where you can execute commands following the runtime build. In this case, we’re running manage.py makemigrations &amp;amp;&amp;amp; python migrate. You could apply database migrations as part of the CI workflow, but you would need to set the connection string as a secret, and if you have networking rules securing your database you will need to make the database accessible from the CI pipeline. Finally, the job deploys the code using the webapps-deploy action. - name: Disable static collection and set migration command on App Service uses: Azure/appservice-settings@v1 with: app-name: ${{ env.WEBAPP_NAME }} app-settings-json: '[{ &quot;name&quot;: &quot;DISABLE_COLLECTSTATIC&quot;, &quot;value&quot;: &quot;true&quot; }, { &quot;name&quot;: &quot;POST_BUILD_COMMAND&quot;, &quot;value&quot;: &quot;python manage.py makemigrations &amp;amp;&amp;amp; python manage.py migrate&quot; }, { &quot;name&quot;: &quot;SCM_DO_BUILD_DURING_DEPLOYMENT&quot;, &quot;value&quot;: &quot;true&quot; }, { &quot;name&quot;: &quot;DJANGO_ENV&quot;, &quot;value&quot;: &quot;production&quot;}]' - name: Deploy to App Service uses: azure/webapps-deploy@v2 with: app-name: ${{ env.WEBAPP_NAME}} Flask and Vue.js See the example workflow for building and deploying a Flask app with Vue.js. Fork this repository and create a secret with the Service Principal. Name the secret AZURE_SERVICE_PRINCIPAL. You also need to replace the placeholder value for the RESOURCE_GROUP environment variable at the top of the workflow file. This workflow begins similarly to the Django example by setting the Python version, creating a virtual environment, and installing the Python packages. Unique to this example, it also sets Node.js to the desired version since the job will need to install the Vue project’s dependencies and build it. - uses: actions/checkout@v2 - name: Set up Python uses: actions/setup-python@v2 with: python-version: 3.6 - name: Set up Node.js uses: actions/setup-node@v1 with: node-version: 12 - name: Install and build Vue.js project run: | npm install npm run build - name: Create and start virtual environment run: | python3 -m venv venv source venv/bin/activate - name: Install dependencies run: pip install -r requirements.txt - name: test with PyTest run: pytest --cov=app --cov-report=xml Once the Flask and Vue.js apps are built and tested the files are uploaded for the second job… except for the node_modules/ and venv/ directories. We want to exclude these directories and allow Oryx to install the dependencies on the runtime image like in the Django example. - name: Upload artifact for deployment jobs uses: actions/upload-artifact@v2 with: name: python-app path: | . !node_modules/ !venv/ The second job downloads the artifact, logs into the Azure CLI, and sets the SCM_DO_BUILD_DURING_DEPLOYMENT flag and FLASK_ENV to “production”. Unlike the Django example, the workflow sets the “startup-file” command to gunicorn --bind=0.0.0.0 --timeout 600 app:app. (Gunicorn is a WSGI HTTP Server commonly used for Python applications. Learn more about custom startup commands on App Service. - uses: actions/download-artifact@v2 with: name: python-app path: . - name: Log in to Azure CLI uses: azure/login@v1 with: creds: ${{ secrets.AZURE_SERVICE_PRINCIPAL }} - name: Configure deployment and runtime settings on the webapp run: | az configure --defaults ${{ env.RESOURCE_GROUP }} az webapp config appsettings --name ${{ env.WEBAPP_NAME }} --settings \ SCM_DO_BUILD_DURING_DEPLOYMENT=true \ FLASK_ENV=production az webapp config set --name ${{ env.WEBAPP_NAME }} \ --startup-file &quot;gunicorn --bind=0.0.0.0 --timeout 600 app:app&quot; Finally, the application is deployed with the webapps-deploy action. - name: Deploy to App Service uses: azure/webapps-deploy@v2 with: app-name: ${{ env.WEBAPP_NAME}}</summary></entry><entry><title type="html">New App Service Anti-virus Logs in Public Preview</title><link href="https://azure.github.io/AppService/2020/12/09/AzMon-AppServiceAntiVirusScanLogs.html" rel="alternate" type="text/html" title="New App Service Anti-virus Logs in Public Preview" /><published>2020-12-09T00:00:00+00:00</published><updated>2020-12-09T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2020/12/09/AzMon-AppServiceAntiVirusScanLogs</id><content type="html" xml:base="https://azure.github.io/AppService/2020/12/09/AzMon-AppServiceAntiVirusScanLogs.html">&lt;p&gt;App Service has added support for anti-virus scans which can send logs to a Storage account, Log Analytics workspace, and Even Hubs for better application monitoring. The new log support, available in &lt;a href=&quot;/AppService/2019/11/01/App-Service-Integration-with-Azure-Monitor.html&quot;&gt;Diagnostic settings&lt;/a&gt; as &lt;strong&gt;“AppServiceAntiVirusScanLogs”&lt;/strong&gt;, helps customers better monitor the site content of their web app. This logging feature is available for both Windows and Linux based web apps using our Premium and Isolated App Service plans. This feature is currently in public preview and has certain &lt;a href=&quot;#feature-limitations&quot;&gt;feature limitations&lt;/a&gt; and &lt;a href=&quot;#known-issues&quot;&gt;known issues&lt;/a&gt; which will be covered in this blog and will be updated accordingly.&lt;/p&gt;
+
+&lt;p&gt;The anti-virus scan leverages &lt;a href=&quot;https://www.microsoft.com/en-us/windows/comprehensive-security&quot;&gt;Microsoft Defender&lt;/a&gt; and will run once daily on your website content. There will be a log regardless of if there are any infected files detected. If there are infected files detected, the log will provide a list of infected files. If there are no infected files detected, the log will show an empty list of infected files.&lt;/p&gt;
+
+&lt;h2 id=&quot;feature-limitations&quot;&gt;Feature Limitations&lt;/h2&gt;
+
+&lt;p&gt;The feature has a few limitations (see list below). Should you meet any of the limitations, the logs will show an error message explaining why it didn’t scan your web app. The following limitations are:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Will scan your files once a day (currently can’t control when the scan runs)&lt;/li&gt;
+  &lt;li&gt;Will not scan web apps with more than 1GB of site content&lt;/li&gt;
+  &lt;li&gt;Will not scan web apps with more than 10,000 files in the site content&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If your web app has more than 1GB of content or more than 10,000 files the scan will not run and your logs will show an error message explaining that the pre-requisite was not met.&lt;/p&gt;
+
+&lt;h2 id=&quot;known-issues&quot;&gt;Known Issues&lt;/h2&gt;
+
+&lt;p&gt;For web apps with more than 10,000 files you will see the following error message in your logs: “Internal service error occurred. Please contact support.”. In the next release, the logs will reflect the correct error message.&lt;/p&gt;
+
+&lt;h2 id=&quot;sample-logs&quot;&gt;Sample Logs&lt;/h2&gt;
+
+&lt;h3 id=&quot;sample-of-log-without-scanned-virus&quot;&gt;Sample of log without scanned virus:&lt;/h3&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;time&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2020-10-10T22:54:13.7712259Z&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ResourceId&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/SUBSCRIPTIONS/XXXXX-XXXXX-XXXXX-XXXXX-XXXXX/RESOURCEGROUPS/XXXXX/PROVIDERS/MICROSOFT.WEB/SITES/XXXXX&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Category&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;AppServiceAntivirusScanAuditLogs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;OperationName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;AntivirusScan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Properties&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;TimeStamp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2020-10-10T22:54:13.7254874Z&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Category&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;AppServiceAntivirusScanAuditLogs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ScanStatus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Succeeded&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;TotalFilesScanned&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;358&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;NumberOfInfectedFiles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ListOfInfectedFiles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ErrorMessage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;sample-of-log-with-scanned-virus&quot;&gt;Sample of log with scanned virus:&lt;/h3&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;time&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2020-10-10T22:54:13.7712259Z&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ResourceId&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/SUBSCRIPTIONS/XXXXX-XXXXX-XXXXX-XXXXX-XXXXX/RESOURCEGROUPS/XXXXX/PROVIDERS/MICROSOFT.WEB/SITES/XXXXX&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Category&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;AppServiceAntivirusScanAuditLogs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;OperationName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;AntivirusScan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Properties&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;TimeStamp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2020-10-10T22:54:13.7254874Z&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Category&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;AppServiceAntivirusScanAuditLogs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ScanStatus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Succeeded&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;TotalFilesScanned&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;358&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;NumberOfInfectedFiles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ListOfInfectedFiles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/IAmVirus.txt&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ErrorMessage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Azure App Service</name></author><summary type="html">App Service has added support for anti-virus scans which can send logs to a Storage account, Log Analytics workspace, and Even Hubs for better application monitoring. The new log support, available in Diagnostic settings as “AppServiceAntiVirusScanLogs”, helps customers better monitor the site content of their web app. This logging feature is available for both Windows and Linux based web apps using our Premium and Isolated App Service plans. This feature is currently in public preview and has certain feature limitations and known issues which will be covered in this blog and will be updated accordingly.</summary></entry><entry><title type="html">App Service Environment v3 public preview</title><link href="https://azure.github.io/AppService/2020/11/18/asev3-public-preview-announcement.html" rel="alternate" type="text/html" title="App Service Environment v3 public preview" /><published>2020-11-18T00:00:00+00:00</published><updated>2020-11-18T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2020/11/18/asev3-public-preview-announcement</id><content type="html" xml:base="https://azure.github.io/AppService/2020/11/18/asev3-public-preview-announcement.html">&lt;p&gt;We are happy to announce the public preview of the App Service Environment v3 (ASEv3). The ASEv3 project is a realization of several years of infrastructure development to enable a best in class Isolated application hosting PaaS service. This release has been driven directly by customer feedback and satisfies multiple situations that were not covered by ASEv2.&lt;/p&gt;
+
+&lt;p&gt;The App Service Environment (ASE) is a single tenant instance of the Azure App Service that injects into a customers Azure Virtual Network (VNet). Until now, the ASE has required many networking dependencies that must be allowed in the customer VNet in order for the ASE to operate properly. ASEv3 has several major changes in the system architecture that serve to remove all management traffic from the customer VNet. The end result is a single tenant system that has no internet hosted dependencies in the customer network. Customers can secure their workloads to their heart’s content without hurting the ASE and Microsoft can secure the infrastructure without hurting customer workloads. This system enables both parties to apply all of the security they want to without affecting each other.&lt;/p&gt;
+
+&lt;p&gt;The pricing for ASEv3 is changed from ASEv2.  With ASEv3 you just pay for the Isolated V2 SKU rates for your App Service plans. There is no stamp fee. If your ASEv3 is totally empty, you are charged as if you had one App Service plan with one instance of I1v2.  The hosts used in ASEv3 are the same type used with Premium V3. The size options in ASEv3 are: 2 core  8 GB RAM, 4 core 16 GB RAM, 8 core 32 GB RAM.&lt;/p&gt;
+
+&lt;p&gt;With respect to networking dependencies it should be reiterated that there are no required Network Security Groups, no required route tables and no required service endpoints.  You can route and filter things with an eye centered on just what your apps need. If you want to configure your apps to force tunnel all outbound traffic on-premises, you can do so.  If you want to send all outbound traffic through an NVA, no problem. And if you want to put a WAF device to monitor all inbound traffic to your ASEv3, you can add that without any limitations.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/09/asev2-to-asev3-dependencies.png&quot; alt=&quot;ASEv2 to ASEv3 dependencies diagram&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a number of limitations as this preview starts off. Some features that are available in ASEv2 are not available in the current form of ASEv3. Missing features will be added as the preview goes on. To get a more complete overview on ASEv3, read the ASEv3 focused &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/environment/overview&quot;&gt;App Service Environment overview&lt;/a&gt;.  If you want to create a new ASEv3, read &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/environment/creation&quot;&gt;Creating an App Service Environment v3&lt;/a&gt;.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="networking" /><summary type="html">We are happy to announce the public preview of the App Service Environment v3 (ASEv3). The ASEv3 project is a realization of several years of infrastructure development to enable a best in class Isolated application hosting PaaS service. This release has been driven directly by customer feedback and satisfies multiple situations that were not covered by ASEv2.</summary></entry><entry><title type="html">Hosting .NET 5 Applications on Azure App Service</title><link href="https://azure.github.io/AppService/2020/11/16/Hosting-dotnet-five-Applications-on-Azure-App-Service.html" rel="alternate" type="text/html" title="Hosting .NET 5 Applications on Azure App Service" /><published>2020-11-16T00:00:00+00:00</published><updated>2020-11-16T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2020/11/16/Hosting%20dotnet%20five%20Applications%20on%20Azure%20App%20Service</id><content type="html" xml:base="https://azure.github.io/AppService/2020/11/16/Hosting-dotnet-five-Applications-on-Azure-App-Service.html">&lt;p&gt;With the newly announced launch of &lt;a href=&quot;https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/&quot;&gt;.NET 5 General Availability&lt;/a&gt;, App Service is offering immediate support for .NET 5 via Early Access stack.  The new Early Access stack feature on app service enables faster and more frequent updates for new versions of supported languages.  To learn more about Early Access, please visit the &lt;a href=&quot;https://github.com/Azure/app-service-linux-docs/blob/master/Runtime_Support/early_access.md&quot;&gt;Early Access Runtime&lt;/a&gt;  document.  .NET 5 (Early Access) applications are supported across all public regions for both Windows and Linux scenarios. The following outlines how you can use .NET 5 with App Service via the Azure Portal, GitHub Actions, Azure DevOps, and custom containers.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;For Sovereign cloud deployment progress, follow this &lt;a href=&quot;https://github.com/Azure/app-service-announcements/issues/302&quot;&gt;GitHub issue&lt;/a&gt; for periodic updates&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;local-setup&quot;&gt;Local Setup&lt;/h2&gt;
+&lt;p&gt;In order to develop with .NET 5 locally you will first need the newly released &lt;a href=&quot;https://dotnet.microsoft.com/download/dotnet/5.0&quot;&gt;.NET 5 SDK&lt;/a&gt; .  If you are using Visual Studio you will need to download and use the latest Visual Studio 2019 version(&lt;a href=&quot;https://visualstudio.microsoft.com/downloads/&quot;&gt;16.8&lt;/a&gt;) which will allow you to create a .NET 5 application from the Visual Studio UI and publish your code to your web app.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/11/net5_1.png&quot; alt=&quot;createapp&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you would like to upgrade an existing project to .NET 5, please see &lt;a href=&quot;https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/&quot;&gt;this announcement&lt;/a&gt; to get started.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;create-a-net-5-web-app-in-the-portal&quot;&gt;Create a .NET 5 Web App in the Portal&lt;/h2&gt;
+&lt;p&gt;The first option you must create and deploy a .NET 5 application is directly through the portal for both Windows and Linux apps.  You will create a Web App like you normally would (see our &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/quickstart-dotnetcore?pivots=platform-linux&quot;&gt;Quickstart&lt;/a&gt; for details).&lt;/p&gt;
+
+&lt;p&gt;When selecting the runtime stack you will see an option to choose .NET 5 (Early Access).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/11/net5_2.png&quot; alt=&quot;createappearlyaccess&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Choose this option when creating your application, review your web app configuration and create the .NET 5 web app.  When your web app is published you are now ready to deploy code to your application through Visual Studio or with continuous deployment via GitHub Actions and Azure DevOps.  If deploying with Visual Studio using &lt;a href=&quot;https://docs.microsoft.com/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019&quot;&gt;right-click Publish&lt;/a&gt;, you’ll need to create the web app in the portal first using the directions above.  Full support with Visual Studio will be available by the end of the month.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploying-via-cli&quot;&gt;Deploying via CLI&lt;/h2&gt;
+&lt;p&gt;Another option to create a Web App with a .NET 5 runtime is through the Azure CLI with the az webapp create and az webapp up commands.  Before you run these commands,  make sure you are  up to date  on the most recent version of the Azure CLI first.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Once you are on the latest version,  you can run &lt;code class=&quot;highlighter-rouge&quot;&gt;az webapp list-runtimes -linux&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;az webapp list-runtimes&lt;/code&gt; (for windows) and you will find &lt;strong&gt;“DOTNET|5.0”&lt;/strong&gt; in the list of available runtimes.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Next run the follwing command to create a web app with a .NET 5 runtime.&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az webapp create &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; MyResourceGroup &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; MyPlan &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; MyUniqueAppName &lt;span class=&quot;nt&quot;&gt;--runtime&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DOTNET |5.0&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--deployment-local-git&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Verify that your web app was created on the Azure portal&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You may also use the &lt;code class=&quot;highlighter-rouge&quot;&gt;az webapp up&lt;/code&gt; command to deploy to App Service, which allows you to deploy your code quickly from a local workspace where the code is present.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;az login&lt;/code&gt; command to login into Azure&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Go to the source of where your code is and run the command where your code is located (for .NET apps, this is where the .csproj is located).&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;az webapp up &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; myUniqueAppName
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This will deploy your .NET 5 application directly to App Service.  For more arguments and examples of az webapp up, please see the &lt;a href=&quot;https://docs.microsoft.com/cli/azure/webapp?view=azure-cli-latest#az_webapp_up&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;continuous-deployment-with-github-actions&quot;&gt;Continuous deployment with GitHub Actions&lt;/h2&gt;
+&lt;p&gt;GitHub Actions enables you to automate your deployment workflows through a defined YAML file added to your repository containing a collection of actions that run when triggered.  Before the workflow file is setup, you will need to grab azure credentials by creating a service principal and save them as a secret in GitHub to add to your workflow file.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you would like to setup GitHub Actions through the App Service Deployment Center to automatically generate a workflow file, see our &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/deploy-github-actions?tabs=applevel#use-the-deployment-center&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;create-a-service-principal&quot;&gt;Create a Service Principal&lt;/h3&gt;
+&lt;p&gt;Our workflow will use a Service Principal to authenticate with Azure when deploying the container to App Service. A service principal is an Active Directory Identity created for use with automation scenarios, such as GitHub Actions.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the following command in Azure CLI in PowerShell to get the credentials needed to run the login action. The output of this command will be a collection of key value pairs that you’ll need to add to your GitHub secrets.&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; az ad sp create-for-rbac &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;appservice-name&amp;gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--role&lt;/span&gt; contributor &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--scopes&lt;/span&gt; /subscriptions/&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;subscription-id&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;/resourceGroups/&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;resource-group&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--sdk-auth&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Copy the output into your GitHub secrets to use as your &lt;code class=&quot;highlighter-rouge&quot;&gt;AZURE_CREDENTIALS&lt;/code&gt; secret.&lt;/p&gt;
+
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;clientId&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;GUID&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;clientSecret&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;GUID&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;subscriptionId&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;GUID&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;tenantId&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;GUID&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;secure-secrets&quot;&gt;Secure Secrets&lt;/h3&gt;
+&lt;p&gt;Since we are using sensitive information that you don’t want others to access, we will use GitHub secrets to protect our information. Create a secret by following the directions &lt;a href=&quot;https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets&quot;&gt;here&lt;/a&gt;. Add the GitHub secrets variables below with your own secrets appropriate from each resource.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AZURE_WEBAPP_NAME&lt;/code&gt;: web-app-name&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AZURE_CREDENTIALS&lt;/code&gt;: the JSON output of the &lt;code class=&quot;highlighter-rouge&quot;&gt;az ad sp create-for-rbac&lt;/code&gt; command&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;setup-workflow-file&quot;&gt;Setup Workflow file&lt;/h3&gt;
+&lt;p&gt;To setup your GitHub workflow file, go to the &lt;strong&gt;Actions&lt;/strong&gt; tab in your repository and &lt;strong&gt;set up a workflow yourself&lt;/strong&gt;.  This will lead you to an editing page where you can add a workflow.  At this point you can save and commit the code.  Remove the default code in the workflow file and replace it with the yaml sample below.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.NET Core&lt;/span&gt; 
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt; 
+&lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+  &lt;span class=&quot;na&quot;&gt;AZURE_WEBAPP_PACKAGE_PATH&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.'&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;# set this to the path to your web app project, defaults to the repository root &lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;DOTNET_VERSION&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;5.0.100'&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;# this is set to the GA version of .NET 5&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;windows-latest&lt;/span&gt; 
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+      &lt;span class=&quot;c1&quot;&gt;# Checkout the repo &lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@master&lt;/span&gt; 
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;azure/login@v1&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+          &lt;span class=&quot;na&quot;&gt;creds&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt; 
+       
+      &lt;span class=&quot;c1&quot;&gt;# Setup .NET Core SDK &lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Setup .NET Core&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/setup-dotnet@v1&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+          &lt;span class=&quot;na&quot;&gt;dotnet-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;  
+       
+      &lt;span class=&quot;c1&quot;&gt;# Run dotnet build and publish &lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;dotnet build and publish&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt; 
+          &lt;span class=&quot;s&quot;&gt;dotnet restore &lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;dotnet build --configuration Release &lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;dotnet publish -c Release -o '$/myapp'  &lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt; &lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# Deploy to Azure Web apps &lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Azure&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;webapp&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;azure&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;credentials'&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;azure/webapps-deploy@v2&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;  
+          &lt;span class=&quot;na&quot;&gt;app-name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Replace with your app name &lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$/myapp'&lt;/span&gt; 
+       
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;logout&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt; 
+          &lt;span class=&quot;s&quot;&gt;az logout&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Before you save and commit the code you will need to adjust the ‘runs-on:’ argument to either ‘windows-latest’ or ‘ubuntu-latest’ depending on your application.  Once that is done you can hit &lt;strong&gt;Save and commit&lt;/strong&gt;.  The workflow file will use the secret you created earlier from ‘secrets.AZURE_CREDENTIALS’ and secrets.AZURE_WEBAPP_NAME’ to run the actions and deploy your code.  Verify that it has deployed by going to your Web App in the Azure Portal and launching your application.&lt;/p&gt;
+
+&lt;h2 id=&quot;continuous-deployment-with-azure-devops&quot;&gt;Continuous deployment with Azure DevOps&lt;/h2&gt;
+&lt;p&gt;Azure DevOps is another option for deploying your code with continuous deployment to your .NET 5 Web App enabling you to host, build, plan and test your code through Azure Pipelines.  To get started, you will need to first &lt;strong&gt;Create a new project&lt;/strong&gt; and &lt;a href=&quot;https://docs.microsoft.com/azure/devops/repos/git/import-git-repository?view=azure-devops&quot;&gt;Import a Git repo&lt;/a&gt;.  Once you have your code uploaded to your DevOps project, you can start building your Pipeline to deploy to your Web App.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Go to &lt;strong&gt;Pipelines&lt;/strong&gt; in the left menu and click the &lt;strong&gt;Create Pipeline&lt;/strong&gt; button on the following page&lt;/li&gt;
+  &lt;li&gt;Connect to your &lt;strong&gt;Azure Repos Git&lt;/strong&gt;, Select your repository and Configure your pipeline choosing the &lt;strong&gt;ASP.NET&lt;/strong&gt; option. Azure DevOps will suggest a pipeline configuration, but we will be replacing it with the example below&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;After the above step you will be taken to the Review tab.  Replace the suggested code with the template below:&lt;/p&gt;
+
+    &lt;p&gt;If you are using Windows, replace the  &lt;code class=&quot;highlighter-rouge&quot;&gt;vmImage:&lt;/code&gt; value with &lt;code class=&quot;highlighter-rouge&quot;&gt;windows-latest&lt;/code&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;na&quot;&gt;trigger&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+ &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
+
+ &lt;span class=&quot;na&quot;&gt;pool&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;vmImage&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ubuntu-latest'&lt;/span&gt;
+
+ &lt;span class=&quot;na&quot;&gt;variables&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;buildConfiguration&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Release'&lt;/span&gt;
+
+ &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+ &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;UseDotNet@2&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;packageType&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;sdk'&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;5.0.100'&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;includePreviewVersions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+
+ &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;DotNetCoreCLI@2&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Build&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;projects&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;**/*.csproj'&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;--configuration&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$(buildConfiguration)'&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Update this to match your need)'&lt;/span&gt;
+
+ &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;DotNetCoreCLI@2&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;publish&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;publishWebProjects&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;True&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;--configuration&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$(BuildConfiguration)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;--output&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$(Build.ArtifactStagingDirectory)'&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;zipAfterPublish&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;True&lt;/span&gt;
+
+ &lt;span class=&quot;c1&quot;&gt;# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.&lt;/span&gt;
+ &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;PublishBuildArtifacts@1&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;pathtoPublish&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$(Build.ArtifactStagingDirectory)'&lt;/span&gt; 
+     &lt;span class=&quot;na&quot;&gt;artifactName&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;myWebsiteName'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Now &lt;strong&gt;Save and run&lt;/strong&gt; your build pipeline.  This will build your application and create an artifact that will be used for your release pipeline.  After the run, you can create your release pipeline.&lt;/li&gt;
+  &lt;li&gt;Go to &lt;strong&gt;Releases&lt;/strong&gt; in the left menu area and click the &lt;strong&gt;New Pipeline&lt;/strong&gt; button on the following page&lt;/li&gt;
+  &lt;li&gt;Next, select the &lt;strong&gt;Azure App Service deployment&lt;/strong&gt; template and hit &lt;strong&gt;Apply&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In the following page, select the +Add an artifact box on the left to add the artifact we previously created in the Build pipeline&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/AppService/media/2020/11/net5_3.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Choose your &lt;strong&gt;Source(build pipeline)&lt;/strong&gt; and hit the &lt;strong&gt;Add&lt;/strong&gt; button&lt;/li&gt;
+  &lt;li&gt;Once that is set you’ll want to setup the trigger by clicking the lightning bolt icon in the top right of your artifact&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A new window will pop up. Switch the &lt;strong&gt;Continuous  deployment trigger&lt;/strong&gt; to &lt;strong&gt;Enabled&lt;/strong&gt; and close the window&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/AppService/media/2020/11/net5_4.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Next, you can click on the 1 job, 1 task link to setup your deployment stage&lt;/li&gt;
+  &lt;li&gt;Fill in your Parameters under “Stage 1”
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Azure subscription:&lt;/strong&gt; your azure subscription&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;App type:&lt;/strong&gt; Web App on Linux OR Web App on Windows&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;App service name:&lt;/strong&gt; your App Service name&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;After your “Stage 1” parameters are filled in, click the &lt;strong&gt;Run on agent&lt;/strong&gt; box and modify the &lt;strong&gt;Agent Specification&lt;/strong&gt; to run the appropriate ubuntu or windows agent&lt;/li&gt;
+  &lt;li&gt;Now you can click the &lt;strong&gt;Deploy Azure App Service&lt;/strong&gt; box and review the pre-filled parameters.  Update any parameters if needed&lt;/li&gt;
+  &lt;li&gt;Click on the &lt;strong&gt;Save&lt;/strong&gt; icon on the top right menu&lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;OK&lt;/strong&gt; for the folder location and Create release&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Select the “Stage 1” trigger from the drop down menu and click &lt;strong&gt;Create&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/AppService/media/2020/11/net5_4.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Once the release is created it will be named “Release-1” and you will be able to see a similar screen as above.  Click &lt;strong&gt;Deploy&lt;/strong&gt; under the Stage 1 and &lt;strong&gt;Deploy&lt;/strong&gt; again on the next screen to start your deployment to your Azure App Service Web App.&lt;/li&gt;
+  &lt;li&gt;Verify that your application has been published by launching your Web App in the Azure Portal.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;container-deployment-with-net-5&quot;&gt;Container Deployment with .NET 5&lt;/h2&gt;
+&lt;p&gt;.NET 5 applications are easily deployable to a custom container on App Service using Linux or Windows. When deploying a container, you are packaging the application and its dependencies into a Linux or Windows based image to run on the App Service platform enabling your application to be more portable.&lt;/p&gt;
+
+&lt;p&gt;The steps for containerizing a .NET 5 application are the same as it would be for other applications.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Right-click&lt;/strong&gt; your project&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Add&lt;/strong&gt; -&amp;gt;  &lt;strong&gt;Docker Support&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Your .NET 5 project will have a new Dockerfile added with the .NET 5.0 base image and SDK ready for you to publish.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;For more information on .NET 5 Docker images, please see the &lt;a href=&quot;https://hub.docker.com/_/microsoft-dotnet-aspnet&quot;&gt;official images for ASP.NET Core runtimes&lt;/a&gt; on docker.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you are using Windows your base image will be &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base&lt;/code&gt; using the &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build&lt;/code&gt; SDK.&lt;/p&gt;
+
+&lt;p&gt;For Linux applications, your base image will be &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base&lt;/code&gt; using the &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build&lt;/code&gt; SDK.&lt;/p&gt;
+
+&lt;div class=&quot;language-docker highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; mcr.microsoft.com/dotnet/aspnet:5.0 AS base  # For Windows apps&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base # For Linux apps&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WORKDIR&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; /app&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;EXPOSE&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; 80&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;EXPOSE&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; 443&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; mcr.microsoft.com/dotnet/sdk:5.0 AS build  # For Windows apps&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build # For Linux apps&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WORKDIR&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; /src&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; [&quot;dotnet5app/dotnet5app.csproj&quot;, &quot;dotnet5app/&quot;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;dotnet restore &lt;span class=&quot;s2&quot;&gt;&quot;dotnet5app/dotnet5app.csproj&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; . .&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WORKDIR&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; &quot;/src/dotnet5containerwindows&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;dotnet build &lt;span class=&quot;s2&quot;&gt;&quot;dotnet5app.csproj&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; Release &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /app/build
+
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; build AS publish&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;dotnet publish &lt;span class=&quot;s2&quot;&gt;&quot;dotnet5app.csproj&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; Release &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /app/publish
+
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; base AS final&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WORKDIR&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; /app&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; --from=publish /app/publish .&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ENTRYPOINT&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; [&quot;dotnet&quot;, &quot;dotnet5app.dll&quot;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After you have added Docker support, you will publish it to a registry, and create your App Service as usual. See our documentation for more detail on &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/app-service-web-get-started-windows-container&quot;&gt;deploying a containerized application&lt;/a&gt;.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="dotnet" /><summary type="html">With the newly announced launch of .NET 5 General Availability, App Service is offering immediate support for .NET 5 via Early Access stack. The new Early Access stack feature on app service enables faster and more frequent updates for new versions of supported languages. To learn more about Early Access, please visit the Early Access Runtime document. .NET 5 (Early Access) applications are supported across all public regions for both Windows and Linux scenarios. The following outlines how you can use .NET 5 with App Service via the Azure Portal, GitHub Actions, Azure DevOps, and custom containers.</summary></entry><entry><title type="html">NAT Gateway and app integration</title><link href="https://azure.github.io/AppService/2020/11/15/web-app-nat-gateway.html" rel="alternate" type="text/html" title="NAT Gateway and app integration" /><published>2020-11-15T00:00:00+00:00</published><updated>2020-11-15T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2020/11/15/web-app-nat-gateway</id><content type="html" xml:base="https://azure.github.io/AppService/2020/11/15/web-app-nat-gateway.html">&lt;p&gt;The Azure App Service has quite a few networking integration capabilities but, until now, did not support a dedicated outbound address. We are very happy to say that now you can use a &lt;a href=&quot;https://docs.microsoft.com/azure/virtual-network/quickstart-create-nat-gateway-portal&quot;&gt;NAT Gateway&lt;/a&gt; with your web app in the Azure App Service.&lt;/p&gt;
+
+&lt;p&gt;The NAT Gateway solves another problem beyond providing a dedicated internet address. You can also now have 64k outbound SNAT ports usable by your apps. One of the challenges in the App Service is the limit on the number of connections you can have to the same address and port. There are more details on this problem in the &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/troubleshoot-intermittent-outbound-connection-errors&quot;&gt;Troubleshooting intermittent outbound connection errors&lt;/a&gt; guide.&lt;/p&gt;
+
+&lt;p&gt;To use a NAT Gateway with your app, you need to&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Configure Regional Vnet Integration with your app as described in &lt;a href=&quot;https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet&quot;&gt;Integrate your app with an Azure virtual network&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Route all the outbound traffic into your Azure virtual network&lt;/li&gt;
+  &lt;li&gt;Provision a NAT Gateway in the same virtual network and configure it with the subnet used for VNet Integration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/11/natgw-webapp.png&quot; alt=&quot;nat gateway with web app&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After these changes have been made, the calls made by your app to the internet will go out the NAT Gateway. You can alternatively use an Azure Firewall if you want to control egress by FQDN but it won’t give you the 64k outbound SNAT ports.&lt;/p&gt;
+
+&lt;p&gt;To use a NAT Gateway you need to use Regional VNet Integration. To use Regional VNet Integration your app needs to be in a Standard, Premium V2 or Premium V3 App Service plan. This feature will work with Function apps as well as web or API apps. There are some Standard App Service plans that can’t use Regional VNet Integration as they are in older App Service deployments.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="networking" /><summary type="html">The Azure App Service has quite a few networking integration capabilities but, until now, did not support a dedicated outbound address. We are very happy to say that now you can use a NAT Gateway with your web app in the Azure App Service.</summary></entry><entry><title type="html">Azure App Service and Azure Functions on Azure Stack Hub 2020 Q3 Released</title><link href="https://azure.github.io/AppService/2020/11/12/App-Service-on-Azure-Stack-Hub-2020-Q3-Update-Released.html" rel="alternate" type="text/html" title="Azure App Service and Azure Functions on Azure Stack Hub 2020 Q3 Released" /><published>2020-11-12T00:00:00+00:00</published><updated>2020-11-12T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2020/11/12/App%20Service%20on%20Azure%20Stack%20Hub%202020%20Q3%20Update%20Released</id><content type="html" xml:base="https://azure.github.io/AppService/2020/11/12/App-Service-on-Azure-Stack-Hub-2020-Q3-Update-Released.html">&lt;p&gt;The 2020 Q3 update to Azure App Service on Azure Stack Hub is now available. This release updates the resource provider and brings the following key capabilities and fixes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Updates to &lt;strong&gt;App Service Tenant, Admin, Functions portals and Kudu tools&lt;/strong&gt;. Consistent with Azure Stack Portal SDK version.&lt;/li&gt;
+  &lt;li&gt;Updates &lt;strong&gt;Azure Functions&lt;/strong&gt; runtime to &lt;strong&gt;v1.0.13154&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Updates to core service to improve reliability and error messaging enabling easier diagnosis of common issues.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Updates to the following application frameworks and tools&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;ASP.NET Core 2.1.22&lt;/li&gt;
+      &lt;li&gt;ASP.NET Core 2.2.14&lt;/li&gt;
+      &lt;li&gt;ASP.NET Core 3.1.8&lt;/li&gt;
+      &lt;li&gt;ASP.NET Core Module v2 13.1.19331.0&lt;/li&gt;
+      &lt;li&gt;Azul OpenJDK
+        &lt;ul&gt;
+          &lt;li&gt;8.42.0.23&lt;/li&gt;
+          &lt;li&gt;8.44.0.11&lt;/li&gt;
+          &lt;li&gt;11.35.15&lt;/li&gt;
+          &lt;li&gt;11.37.17&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Curl 7.55.1&lt;/li&gt;
+      &lt;li&gt;Git for Windows 2.28.0.1&lt;/li&gt;
+      &lt;li&gt;MSDeploy 3.5.90702.36&lt;/li&gt;
+      &lt;li&gt;NodeJS
+        &lt;ul&gt;
+          &lt;li&gt;14.10.1&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;NPM
+        &lt;ul&gt;
+          &lt;li&gt;6.14.8&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;PHP 7.4.5&lt;/li&gt;
+      &lt;li&gt;Tomcat
+        &lt;ul&gt;
+          &lt;li&gt;8.5.47&lt;/li&gt;
+          &lt;li&gt;8.5.51&lt;/li&gt;
+          &lt;li&gt;9.0.273&lt;/li&gt;
+          &lt;li&gt;9.0.31&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Updated Kudu to 90.21005.4823&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Updates to underlying operating system of all roles&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://support.microsoft.com/help/4580346&quot;&gt;2020-10 Cumulative Update for Windows Server 2016 for x64-based Systems (KB4580346)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://support.microsoft.com/help/4576750&quot;&gt;2020-09 Servicing Stack Update for Windows Server 2016 for x64-based Systems (KB4576750)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Defender Definition 1.325.755.0&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Cumulative Updates for Windows Server are now applied to Controller roles as part of deployment and upgrade&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;All other fixes and updates are detailed in the App Service on Azure Stack Hub 2020 Q3 Release Notes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The App Service on Azure Stack Hub Update 8 build number is &lt;strong&gt;89.0.2.15&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Please review the &lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/app-service-release-notes-2020-q3&quot;&gt;&lt;strong&gt;release notes and all known issues&lt;/strong&gt;&lt;/a&gt; prior to updating your installation of Azure App Service on Azure Stack Hub.&lt;/p&gt;
+
+&lt;p&gt;You can download the new installer and helper scripts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aka.ms/appsvcupdateq3installer&quot;&gt;Installer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aka.ms/appsvconmashelpers&quot;&gt;Helper Scripts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Please read the updated documentation prior to getting started with deployment:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/app-service-release-notes-2020-q3&quot;&gt;2020 Q3 Update Release Notes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/azure-stack-app-service-before-you-get-started&quot;&gt;Prerequisites for deploying App Service on Azure Stack Hub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/azure-stack-app-service-deploy&quot;&gt;Deploy the App Service Resource Provider&lt;/a&gt; for new deployments&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure-stack/operator/azure-stack-app-service-update&quot;&gt;Update the App Service Resource Provider&lt;/a&gt; for updating existing deployments&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Azure App Service</name></author><category term="Azure Stack" /><summary type="html">The 2020 Q3 update to Azure App Service on Azure Stack Hub is now available. This release updates the resource provider and brings the following key capabilities and fixes:</summary></entry><entry><title type="html">.NET 5 on App Service</title><link href="https://azure.github.io/AppService/2020/11/10/Dot-Net-5-on-App-Service.html" rel="alternate" type="text/html" title=".NET 5 on App Service" /><published>2020-11-10T00:00:00+00:00</published><updated>2020-11-10T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2020/11/10/Dot%20Net%205%20on%20App%20Service</id><content type="html" xml:base="https://azure.github.io/AppService/2020/11/10/Dot-Net-5-on-App-Service.html">&lt;p&gt;We are happy to announce that App Service now supports &lt;strong&gt;.NET 5&lt;/strong&gt; applications across all public regions and scenarios on both Windows and Linux App Service plans.&lt;/p&gt;
+
+&lt;p&gt;The App Service and .NET teams worked closely together to deliver this functionality on the same day as .NET 5 reached GA (&lt;a href=&quot;https://devblogs.microsoft.com/aspnet/announcing-asp-net-core-in-net-5/&quot;&gt;see .NET 5 GA announcement&lt;/a&gt;). Going forward every new preview release of &lt;strong&gt;.Net 6&lt;/strong&gt; and beyond will be available on App Service on DAY 0 of it’s release.&lt;/p&gt;
+
+&lt;p&gt;This is a first for the App Service platform and was achieved through a new &lt;strong&gt;Early Access&lt;/strong&gt; feature (&lt;a href=&quot;https://aka.ms/app-service-early-access&quot;&gt;learn more about App Service Early Access&lt;/a&gt;). App Service &lt;strong&gt;Early Access&lt;/strong&gt; was developed in close cooperation with the .NET team and we are very excited to have .NET 5 GA release be the first runtime deliver through this feature.&lt;/p&gt;
+
+&lt;p&gt;While we are starting with &lt;a href=&quot;https://github.com/Azure/app-service-linux-docs/blob/master/Runtime_Support/dot_net_core.md&quot;&gt;.NET 5 early access&lt;/a&gt; we plan to use the &lt;strong&gt;Early Access&lt;/strong&gt; mechanism to deliver faster and more frequent updates for all the App Service supported languages including Node and Python and others.&lt;/p&gt;
+
+&lt;p&gt;If you want to learn more, be sure to checkout our session during &lt;a href=&quot;https://www.dotnetconf.net/agenda&quot;&gt;.NET Conf 2020&lt;/a&gt; where we’ll talk about how to modernize .NET Framework Apps, by migrating to App Service and 5 ways to get started with .NET 5 on App Service.&lt;/p&gt;</content><author><name>Azure App Service</name></author><category term="dotnet" /><summary type="html">We are happy to announce that App Service now supports .NET 5 applications across all public regions and scenarios on both Windows and Linux App Service plans.</summary></entry><entry><title type="html">A/B Testing with App Service, Part 3: Analyzing the telemetry</title><link href="https://azure.github.io/AppService/2020/10/20/ab_testing_app_service3.html" rel="alternate" type="text/html" title="A/B Testing with App Service, Part 3: Analyzing the telemetry" /><published>2020-10-20T00:00:00+00:00</published><updated>2020-10-20T00:00:00+00:00</updated><id>https://azure.github.io/AppService/2020/10/20/ab_testing_app_service3</id><content type="html" xml:base="https://azure.github.io/AppService/2020/10/20/ab_testing_app_service3.html">&lt;p&gt;This is the third article in our guide for A/B testing with App Service. &lt;a href=&quot;https://azure.github.io/AppService/2020/08/03/ab_testing_app_service.html&quot;&gt;The first article&lt;/a&gt; shows how to set up your client-side project. &lt;a href=&quot;https://azure.github.io/AppService/2020/08/24/ab_testing_app_service2.html&quot;&gt;The second article&lt;/a&gt; shows how to configure your backend.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Share your thoughts in the &lt;a href=&quot;#disqus_thread&quot;&gt;comments section&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now that our client-side and backend projects are configured, we can analyze the data and compare results using Application Insights. Open the &lt;a href=&quot;https://portal.azure.com/&quot;&gt;Azure Portal&lt;/a&gt; and open your Application Insights resource that you created in the first article. On the left side, open &lt;strong&gt;Logs&lt;/strong&gt; under &lt;strong&gt;Monitoring&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/10/ab-testing-logs-button-portal.png&quot; alt=&quot;Open the Logs tab on Application Insights&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;example-1-comparing-request-duration&quot;&gt;Example 1: Comparing request duration&lt;/h2&gt;
+
+&lt;p&gt;This example will show three slots. The &lt;strong&gt;staging&lt;/strong&gt; slot is where our main branch is deployed to every time there is a push to the main branch. The other two slots, labeled &lt;strong&gt;219&lt;/strong&gt; and &lt;strong&gt;230&lt;/strong&gt;, are both pull requests targeting the main branch. We are using App Service’s deployment slots as a staging environment to deploy the pull requests on so we can test them before merging.&lt;/p&gt;
+
+&lt;p&gt;Our goal in this example is to compare the average request durations for an important API call in the application. If we identify that one of the pull requests regresses the performance of that API, then we can investigate the PR’s changes more closely so we don’t regress performance in production.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-query&quot;&gt;The query&lt;/h3&gt;
+
+&lt;p&gt;Let’s walk through the query step-by-step. We will use the &lt;code class=&quot;highlighter-rouge&quot;&gt;dependencies&lt;/code&gt; table which shows outbound calls from our client-side application.  Next, create two columns using the &lt;code class=&quot;highlighter-rouge&quot;&gt;extends&lt;/code&gt; command. The first column, &lt;code class=&quot;highlighter-rouge&quot;&gt;time_bin&lt;/code&gt;, bins the timestamp into 5 minute windows which makes our data less noisy. The other column, &lt;code class=&quot;highlighter-rouge&quot;&gt;slot&lt;/code&gt;, parses the slot name from the &lt;code class=&quot;highlighter-rouge&quot;&gt;customDimension&lt;/code&gt; column.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-txt&quot;&gt;dependencies
+| extend
+    time_bin = bin(timestamp, 5m),
+    slot = tostring(parse_json(customDimensions).slot)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We will also specify a time window of 24 hours, and filter the rows to show only POST calls to &lt;code class=&quot;highlighter-rouge&quot;&gt;/api/flights/reserve&lt;/code&gt;. You can expand or narrow the time window depending on the amount of telemetry your application emits. And you should also change the API path to a valid request in your application. On the last line, &lt;code class=&quot;highlighter-rouge&quot;&gt;project&lt;/code&gt; drops all columns except for &lt;code class=&quot;highlighter-rouge&quot;&gt;slot&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;time_bin&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;duration&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-txt&quot;&gt;| where timestamp &amp;gt; ago(24h)
+  and name == &quot;POST /api/flights/reserve&quot;
+| project slot, time_bin, duration
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Before we render the timechart, use the &lt;code class=&quot;highlighter-rouge&quot;&gt;evaluate pivot(..)&lt;/code&gt; command to rotate the table by turning the unique values in the &lt;strong&gt;slot&lt;/strong&gt; column into multiple columns.  This command will also take the average request duration by each time_bin and slot.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-txt&quot;&gt;| evaluate pivot(slot, avg(duration))
+| render timechart with ( title=&quot;Request duration by slot&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;the-graph&quot;&gt;The graph&lt;/h3&gt;
+
+&lt;p&gt;When the query is executed, you should get a graph similar to the one shown below. Each line represents a deployment slot. The y-axis shows the request duration, and the x-axis shows the time. In the example shown below, we can see that customers that are routed to the slot “230” are experiencing very long request durations. Knowing this, we can investigate the changes in that Pull Request and fix the problem before merging.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/10/ab-testing-request-duration-by-slot-graph.png&quot; alt=&quot;Graph of request duration by slot&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;example-2-comparing-custom-metrics&quot;&gt;Example 2: Comparing custom metrics&lt;/h2&gt;
+
+&lt;p&gt;You can use Application Insight’s &lt;a href=&quot;https://docs.microsoft.com/azure/azure-monitor/app/api-custom-events-metrics#trackmetric&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;telemetryClient.trackMetric()&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://docs.microsoft.com/azure/azure-monitor/app/api-custom-events-metrics#trackevent&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;telemetryClient.trackEvent()&lt;/code&gt;&lt;/a&gt; methods to track custom metrics and events. In this scenario, we are emitting a custom metric to track the average duration of a database query in milliseconds. You could also track the time spent for other backend operations, such as heavy data processing or I/O operations.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-query-1&quot;&gt;The query&lt;/h3&gt;
+
+&lt;p&gt;Your custom metrics are tracked in the &lt;code class=&quot;highlighter-rouge&quot;&gt;customMetrics&lt;/code&gt; table. The first step is to filter the custom metric rows to the metric of interest, which is &lt;code class=&quot;highlighter-rouge&quot;&gt;query_time&lt;/code&gt; in this case. Like before, create a new column, &lt;code class=&quot;highlighter-rouge&quot;&gt;slot&lt;/code&gt;, from the &lt;code class=&quot;highlighter-rouge&quot;&gt;customDimensions&lt;/code&gt; table. Next, take the average value for each slot.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-txt&quot;&gt;customMetrics
+| where name == &quot;query_time&quot;
+| extend slot = tostring(parse_json(customDimensions).SLOT_NAME)
+| summarize avg(value) by slot
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The final step is to render a bar chart and clean up the labels. The &lt;code class=&quot;highlighter-rouge&quot;&gt;order by slot&lt;/code&gt; ensures that the bars of the bar chart are always rendered in the same order.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-txt&quot;&gt;| order by slot
+| render barchart with ( title=&quot;Average query time by slot&quot;, ytitle=&quot;Query time in ms&quot;, xtitle=&quot;Slot name&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;the-graph-1&quot;&gt;The graph&lt;/h3&gt;
+
+&lt;p&gt;Similar to the previous example, this chart shows us that Pull Request 232 is greatly improving the query performance under real-world traffic. This is a good sign, and gives developers or QA teams another data point for the PR review process.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/10/ab-testing-query-time-by-slot-graph.png&quot; alt=&quot;Graph of request duration by slot&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;monitoring-dashboards&quot;&gt;Monitoring dashboards&lt;/h2&gt;
+
+&lt;p&gt;You can use Azure Monitor Workbooks to monitor your experiments and quickly gauge results across your queries. To get started, open your Application Insights resource in the Portal and open the &lt;strong&gt;Workbooks&lt;/strong&gt; blade. Then click &lt;strong&gt;+ New&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/10/ab-testing-create-workbook.png&quot; alt=&quot;Create a new Azure Monitor Workbook&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The workbook will open with a default Markdown section and graph. Click the &lt;strong&gt;Edit&lt;/strong&gt; button below the graph and paste one of the earlier queries. Click &lt;strong&gt;Done Editing&lt;/strong&gt; at the bottom to save the query. You can also annotate your workbook with notes, links, and lists using Markdown.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/AppService/media/2020/10/ai-workbook.gif&quot; alt=&quot;Azure Monitor workbook&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;h3 id=&quot;reference-documentation&quot;&gt;Reference Documentation&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure/data-explorer/kusto/query/tutorial?pivots=azuredataexplorer&quot;&gt;Kusto Query tutorial&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/azure/data-explorer/kusto/query/parsejsonfunction&quot;&gt;Parse JSON method&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Azure App Service</name></author><category term="deployment" /><category term="A/B Testing" /><summary type="html">This is the third article in our guide for A/B testing with App Service. The first article shows how to set up your client-side project. The second article shows how to configure your backend. Share your thoughts in the comments section. Now that our client-side and backend projects are configured, we can analyze the data and compare results using Application Insights. Open the Azure Portal and open your Application Insights resource that you created in the first article. On the left side, open Logs under Monitoring. Example 1: Comparing request duration This example will show three slots. The staging slot is where our main branch is deployed to every time there is a push to the main branch. The other two slots, labeled 219 and 230, are both pull requests targeting the main branch. We are using App Service’s deployment slots as a staging environment to deploy the pull requests on so we can test them before merging. Our goal in this example is to compare the average request durations for an important API call in the application. If we identify that one of the pull requests regresses the performance of that API, then we can investigate the PR’s changes more closely so we don’t regress performance in production. The query Let’s walk through the query step-by-step. We will use the dependencies table which shows outbound calls from our client-side application. Next, create two columns using the extends command. The first column, time_bin, bins the timestamp into 5 minute windows which makes our data less noisy. The other column, slot, parses the slot name from the customDimension column. dependencies | extend time_bin = bin(timestamp, 5m), slot = tostring(parse_json(customDimensions).slot) We will also specify a time window of 24 hours, and filter the rows to show only POST calls to /api/flights/reserve. You can expand or narrow the time window depending on the amount of telemetry your application emits. And you should also change the API path to a valid request in your application. On the last line, project drops all columns except for slot, time_bin, and duration. | where timestamp &amp;gt; ago(24h) and name == &quot;POST /api/flights/reserve&quot; | project slot, time_bin, duration Before we render the timechart, use the evaluate pivot(..) command to rotate the table by turning the unique values in the slot column into multiple columns. This command will also take the average request duration by each time_bin and slot. | evaluate pivot(slot, avg(duration)) | render timechart with ( title=&quot;Request duration by slot&quot;) The graph When the query is executed, you should get a graph similar to the one shown below. Each line represents a deployment slot. The y-axis shows the request duration, and the x-axis shows the time. In the example shown below, we can see that customers that are routed to the slot “230” are experiencing very long request durations. Knowing this, we can investigate the changes in that Pull Request and fix the problem before merging. Example 2: Comparing custom metrics You can use Application Insight’s telemetryClient.trackMetric() and telemetryClient.trackEvent() methods to track custom metrics and events. In this scenario, we are emitting a custom metric to track the average duration of a database query in milliseconds. You could also track the time spent for other backend operations, such as heavy data processing or I/O operations. The query Your custom metrics are tracked in the customMetrics table. The first step is to filter the custom metric rows to the metric of interest, which is query_time in this case. Like before, create a new column, slot, from the customDimensions table. Next, take the average value for each slot. customMetrics | where name == &quot;query_time&quot; | extend slot = tostring(parse_json(customDimensions).SLOT_NAME) | summarize avg(value) by slot The final step is to render a bar chart and clean up the labels. The order by slot ensures that the bars of the bar chart are always rendered in the same order. | order by slot | render barchart with ( title=&quot;Average query time by slot&quot;, ytitle=&quot;Query time in ms&quot;, xtitle=&quot;Slot name&quot;) The graph Similar to the previous example, this chart shows us that Pull Request 232 is greatly improving the query performance under real-world traffic. This is a good sign, and gives developers or QA teams another data point for the PR review process. Monitoring dashboards You can use Azure Monitor Workbooks to monitor your experiments and quickly gauge results across your queries. To get started, open your Application Insights resource in the Portal and open the Workbooks blade. Then click + New. The workbook will open with a default Markdown section and graph. Click the Edit button below the graph and paste one of the earlier queries. Click Done Editing at the bottom to save the query. You can also annotate your workbook with notes, links, and lists using Markdown. Resources Reference Documentation Kusto Query tutorial Parse JSON method</summary></entry></feed>
